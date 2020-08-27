@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- *************************************************************************************
+    '   파일명     index.html
+    '   배포자     KT AI Tech Center
+    '   배포월     2020/05
+    '   목적       기가지니 1,2 서비스 개발을 위한 단말 연동 테스트 & 샘플 코드 제공
+    '   사용방식    1. API link 내 기가지니 서비스 신청/승인
+                  2. 코드 내 개발 Key값 변경
+                  3. 3rd Party 웹 서버에 코드 업로드
+                  4. 기가지니 개발자 모드 등록
+                  5. 기가지니 개발자 모드 실행 후 웹 서버 주소 입력 후 실행
+    '   사용파일   style.css, background.png
+    '   참고      각 API에 대한 extra 값은 JSON.stringify(extra)로 확인
+                 테스트 할 수 있는 변수 (cd6~8, val6~8, extra6~8)
+
+*************************************************************************************** -->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>기가지니1,2 서비스 개발 환경 Test</title>
+
+  <!-- 필수 Embed -->
+  <meta name="viewport" content="height=1080, width=1920, user-scalable=no" />
+  <link href="stylesheets/style.css" rel="stylesheet">
+  <script type="text/javascript" src="https://svcapi.gigagenie.ai/sdk/v1.0/js/gigagenie.js"></script>
+  <script type="text/javascript" src="data/key.json"></script>
+  <script type="text/javascript">
+    function init() {
+      var options = {};
+      options.keytype = 'GBOXDEVM'; // 개발(GBOXDEVM) 또는 상용(GBOXCOMM) 키 종류 입력
+
+
+
+      // 파일에서 불러옴
+      options.apikey = JSON.parse(apikey).kt; // API link에서 발급받은 개발 key";
+
+      // 1.gigagenie.init
+      gigagenie.init(options, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          // init 성공
+          sendTTS('짬봇 보이스에 오신 여러분을 환영합니다.    부대별 식단과 여러 군생활 정보를 묻고 답해드립니다.');
+
+
+          // 기가지니 단말 연결 성공
+          showMsg('setUp', '기가지니 연결 성공 / 단말 타입 = ' + extra.devicetype);
+          showMsg('cd0', result_cd);
+          showMsg('val0', result_msg);
+          showMsg('extra0', 'appid: ' + extra.appid);
+
+          readFileTest()
+
+
+
+
+          // KWS 이후 발화된 내용 중, Dialog Kit을 거치지 않고, App 내에서 받을 수 있도록 함 (음성인식이 잘 되지 않는 단어는 지양)
+          setVoiceFilter();
+
+          // 기가지니 단말 id
+          getContainerId();
+
+          // 사용자 계정 닉네임, KWS 등 설정 확인
+          getUserInfo();
+        }
+      });
+    }
+
+    // 화면 출력
+    function showMsg(id, text) {
+      document.getElementById(id).innerHTML = text;
+    }
+
+    /************************************* init 시 호출 **********************************/
+
+    function getContainerId() {
+      var options = {};
+      // 5-1. gigagenie.appinfo.getContainerId
+      gigagenie.appinfo.getContainerId(options, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          // container id 출력
+          showMsg('cd1', result_cd);
+          showMsg('val1', result_msg);
+          showMsg('extra1', extra.containerid);
+
+        } else {
+          // 에러 출력
+          showMsg('cd1', result_cd);
+          showMsg('val1', result_msg);
+        }
+      })
+    }
+
+    function getUserInfo() {
+      // 5-8.gigagenie.appinfo.getUserInfo
+      gigagenie.appinfo.getUserInfo(null, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          // 기가지니 KWS value 확인(예: 기가지니, 지니야, 친구야, 자기야)
+          showMsg('kws', '\"' + extra.kwsid + '\"'); // 하단 [발화가이드] 내 설정된 KWS 노출
+
+          showMsg('cd2', result_cd);
+          showMsg('val2', result_msg);
+          showMsg('extra2', 'KWS: ' + extra.kwsid + ' / 기가지니 앱 페어링: ' + extra.registwithapp);
+        } else {
+          showMsg('cd2', result_cd);
+          showMsg('val2', result_msg);
+        }
+      });
+    }
+
+    function setVoiceFilter() {
+      var options = {};
+      options.keyword = ['초급', '중급', '고급', '메뉴 테스트'];
+      showMsg('extra3', options.keyword);
+      // 2-10. gigagenie.voice.setVoiceFilter
+      gigagenie.voice.setVoiceFilter(options, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          showMsg('cd3', result_cd);
+          showMsg('val3', result_msg);
+        } else {
+          showMsg('cd3', result_cd);
+          showMsg('val3', result_msg);
+        }
+      })
+    }
+
+    /**************************************************************************************/
+
+    // TTS 출력
+    function sendTTS(tts) {
+      var options = {};
+      options.ttstext = tts;
+      // 2-2 gigagenie.voice.sendTTS
+      gigagenie.voice.sendTTS(options, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          // TTS 출력 성공
+        } else {
+          /* result_cd 200이 아닌 경우 에러코드 확인 후 처리 필요
+              https://github.com/GiGAGenie-ServiceSDK/UserGuide/wiki/voice.sendTTS
+          */
+        }
+      });
+    }
+
+    // 2-12. gigagenie.voice.onVoiceFilterMsg
+    // setVoiceFilter에서 적용된 단어가 인식되면, 해당 API에서 동작 설정
+    gigagenie.voice.onVoiceFilterMsg = function(message) {
+      showMsg('cd4', '인식 성공');
+      switch (message) {
+        case '초급':
+          // 초급 모드 선택
+          showMsg('val4', message);
+          break;
+        case '중급':
+          // 중급 모드 선택
+          showMsg('val4', message);
+          break;
+        case '고급':
+          // 고급 모드 선택
+          showMsg('val4', message);
+          break;
+
+        case '메뉴 테스트':
+          // MenuParser()
+          var response_menu = MenuParser()
+          showMsg('val6', response_menu);
+          showMsg('extra6', "메뉴 파서 성공");
+
+          break;
+      }
+    }
+
+    // 6-3. gigagenie.media.onRemoteKeyEvent
+    // 기가지니 리모컨은 JS Keycode로 받아올 수 있으며, keycode가 없는 ◀, ▶, *, # 는 해당 API로 value를 받을 수 있음
+    gigagenie.media.onRemoteKeyEvent = function(extra) {
+      //alert("onRemoteKeyEvent() is called. key: " + extra.key);
+      showMsg('cd5', 'OK');
+      showMsg('val5', extra.key);
+      showMsg('extra5', JSON.stringify(extra));
+    }
+
+    /********************************* 사용자 발화 입력 방법 *********************************/
+
+    function getVoiceText() {
+      var options = {};
+      options.voicemsg = '원하시는 게임 카테고리를 말해주세요.';
+      // 2-1 gigagenie.voice.getVoiceText
+      gigagenie.voice.getVoiceText(options, function(result_cd, result_msg, extra) {
+        if (result_cd === 200) {
+          showMsg('val9', extra.voicetext);
+        } else {
+          /* result_cd 200이 아닌 경우 에러코드 확인 후 처리 필요
+              https://github.com/GiGAGenie-ServiceSDK/UserGuide/wiki/voice.getVoiceText
+
+              200: 음성인식 성공, extra.voicetext에 인식된 결과가 전달된다.
+              500: Timeout 발생 등으로 음성 인식 실패, extra.voicetext에는 “ASR session timeout” 가 전달된다
+              501: KWS(KeyWord Spotting)에 의해 정지됨
+              502: 재생 실패
+              503: stopTTS에 의한 TTS 종료
+              504: mute 상태로 TTS 재생 불가
+              505: 처리 용량 초과(다국어 음성인식 중 서버 용량 초과시 발생)
+              406: 기가지니 초기화 실패 (API does not initialized)
+          */
+          showMsg('val9', 'result_cd: ' + result_cd + result_msg);
+        }
+      })
+    }
+
+    // 화면 출력
+    function showMsg(id, text) {
+      document.getElementById(id).innerHTML = text;
+    }
+
+    // 2-8. gigagenie.voice.onActionEvent
+    /* ※ 해당 api 사용 시, Service SDK 정보 수정에서 작성한 서비스 url보다 우선순위로 실행
+          기가지니 개발 가이드 [2.서비스 개발하기 - 2.5 인텐트/어휘 정보 가져오기] 참고 */
+    gigagenie.voice.onActionEvent = function(extra) {
+      //전체 extra 값 확인 : JSON.stringify(extra)
+      var intent = extra.actioncode;
+      switch (intent) {
+        case 'selectCategory':
+          // 카테고리 선택 인텐트가 호출된 경우
+          var cat = extra.parameter['NE-CATEGORY'];
+
+          switch (cat) {
+            // 각 케이스에 맞게 개발 진행
+            case '동물':
+              showMsg('val10', '(Intent:' + intent + ') [동물]');
+              break;
+            case '나라':
+              showMsg('val10', '(Intent:' + intent + ') [나라]');
+              break;
+            case '음식':
+              showMsg('val10', '(Intent:' + intent + ') [음식]');
+              break;
+          }
+          break;
+      }
+    }
+
+    /********************************* 필수 포함 로직 **************************************/
+
+    // 1-3. gigagenie.init.onAppStatusChange
+    // https://ktaidevelopers.github.io/2_서비스%20개발하기/디자인%20작업하기/#인터럽트-상황-대응
+    gigagenie.init.onAppStatusChange = function(extra) {
+      alert('onAppStatusChange: status=${extra.changeStatus}, mute=${extra.muteFlag}');
+
+
+
+      if (extra.changeStatus === 0) {
+        if (extra.muteflag === true) {
+          // TODO: 일반적으로 서비스 종료 권고
+          alert('Media Contents Finish');
+          /*
+              gigagenie.voice.svcFinished(null, function (result_cd, result_msg) { });
+          */
+          return;
+
+        } else {
+          // TODO: Media Contents Resume
+          alert('Media Contents Resume');
+
+        }
+      } else { // extra.changeStatus == 1
+        // TODO: Media Contents Pause
+        alert('Media Contents Pause');
+      }
+    }
+
+    // 2-7. gigagenie.voice.onRequestClose
+    // 서비스 종료 명령 수신
+    gigagenie.voice.onRequestClose = function() {
+      /*
+      gigagenie.voice.svcFinished(null, function(result_cd, result_msg) { });
+      */
+    }
+
+    /********************************* 정헌 개발 함수 **************************************/
+
+
+    function MenuParser() {
+      var text, parser, xmlDoc;
+
+      text = "<bookstore><book>" +
+        "<title>파싱 성공!!</title>" +
+        "<author>Giada De Laurentiis</author>" +
+        "<year>2005</year>" +
+        "</book></bookstore>";
+
+      parser = new DOMParser();
+      xmlDoc = parser.parseFromString(text, "text/xml");
+
+      return xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+    }
+
+
+    function readFileTest() {
+      var test_file = JSON.parse(test);
+      showMsg('cd7', test_file.msg1);
+      showMsg('val7', test_file.msg2);
+      showMsg('extra7', test_file.msg3);
+    }
+  </script>
+</head>
+
+<body onload=init()>
+
+  <!-- AI Kits 테스트 영역 -->
+  <section>
+    <div id="refresh">
+      <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
+    </div>
+
+    <div id="init-msg">
+      <h2 id=setUp>기가지니 연결 실패 ( API link에서 발급받은 개발 key 확인 필요 ) </h2>
+    </div>
+
+    <div id="table-left">
+      <h3>[ gigagenie init 성공 시, 결과값 load (연결 실패 시 N/A 값 출력) ]</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:70px">No.</th>
+            <th style="width:120px">API</th>
+            <th style="width:100px">result_cd</th>
+            <th style="width:100px">value</th>
+            <th>참고</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td style="color: #F0E882;">gigagenie.init</td>
+            <td id="cd0">N/A</td>
+            <td id="val0">N/A</td>
+            <td id="extra0"></td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>getContainerId</td>
+            <td id="cd1">N/A</td>
+            <td id="val1">N/A</td>
+            <td id="extra1"></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>getUserInfo</td>
+            <td id="cd2">N/A</td>
+            <td id="val2">N/A</td>
+            <td id="extra2"></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>setVoiceFilter</td>
+            <td id="cd3">N/A</td>
+            <td id="val3">N/A</td>
+            <td id="extra3"></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>onVoiceFilterMsg</td>
+            <td id="cd4">N/A</td>
+            <td id="val4">N/A</td>
+            <td id="extra4">테스트 예시: "지니야, (네?) 중급"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="table-right">
+      <h3>[ 테스트 영역 > 원하는 API를 테스트 해보세요. ]</h3>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:130px">API</th>
+            <th style="width:80px">result</th>
+            <th style="width:110px">value</th>
+            <th style="width:170px">extra</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>onRemoteKeyEvent</td>
+            <td id="cd5">N/A</td>
+            <td id="val5">N/A</td>
+            <td id="extra5">N/A</td>
+          </tr>
+          <!-- 원하는 API 코드 결과 출력 -->
+          <tr>
+            <td>메뉴 테스트(cd6, val6, extra6)</td>
+            <td id="cd6"></td>
+            <td id="val6"></td>
+            <td id="extra6"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="cd7"></td>
+            <td id="val7"></td>
+            <td id="extra7"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="cd8"></td>
+            <td id="val8"></td>
+            <td id="extra8"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="table-bottom">
+      <h3>[ 사용자 발화 입력 방법 / 1. getVoiceText API / 2. onActionEvent ]</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>대상</th>
+            <th>설명</th>
+            <th>입력 방법</th>
+            <th>비고</th>
+            <th>결과 확인</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>getVoiceText</td>
+            <td>Dialog Kit을 거치지 않으며, 개발자가 사용자 발화를 코드 내에서 처리할 수 있습니다.</td>
+            <td><button type="button" class="btn btn-getVoice" onclick="getVoiceText()">getVoiceText</button> 클릭 시 실행</td>
+            <td>{ 동물, 나라, 음식 }</td>
+            <td id="val9">N/A</td>
+          </tr>
+          <tr>
+            <td>onActionEvent</td>
+            <td>입력된 발화를 Dialog Kit에서 분석하여 인텐트, 대표 사전을 결과값으로 리턴해줍니다.</td>
+            <td>기가지니 호출 후, 인텐트 대표 문장 발화</td>
+            <td>"기가지니!" (네?) "동물 선택해줘"</td>
+            <td id="val10">N/A</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id=comment>※ onActionEvent API는 Dialog Kit에서 작업한 Intent와 어휘사전 정보를 가져오며, 통합 배포 완료 후 테스트 가능 합니다. (개발 가이드
+        참고)</h3>
+    </div>
+
+    <!-- 발화 가이드 영역-->
+    <div id="voice-guide">
+      <div class="genie-voice-guide voice-guide-container">
+        <p class="guide-mic">
+          <i class="g-voice-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" :style="`fill: ${this.color};`">
+              <path fill-rule="evenodd"
+                d="M31.354 43.407v8.871h-.041c.004.05.03.093.03.144 0 .906-.783 1.641-1.749 1.641-.967 0-1.75-.735-1.75-1.641 0-.051.026-.094.031-.144h-.03v-8.871c-9.16-.843-15.495-6.911-15.495-16.56 0-.981.709-1.775 1.725-1.775.905 0 1.614.794 1.724 1.775-.11 8.294 5.393 13.639 13.508 13.603 8.116.036 14.204-5.309 14.092-13.603.112-.981.821-1.775 1.726-1.775 1.016 0 1.725.794 1.725 1.775 0 9.649-6.335 15.717-15.496 16.56z" />
+              <path fill-rule="evenodd" d="M29.594 7.812c5.712 0 10.343 4.632 10.343 10.344v8.313c0 5.712-4.631 10.343-10.343 10.343-5.713 0-10.344-4.631-10.344-10.343v-8.313c0-5.712 4.631-10.344 10.344-10.344z" />
+            </svg>
+          </i>
+          <!-- 호출어 추가 -->
+          <!-- gigagenie.appinfo.getUserInfo - extra.kwsid으로 셋팅 -->
+          <span id=kws>KWS</span>
+        </p>
+        <p class="lolling-list">
+          <span>발화가이드01</span>
+          <span>발화가이드02</span>
+          <span>발화가이드03</span>
+        </p>
+        <p class="voice-guide-common">서비스를 종료하려면 “나가기”</p>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

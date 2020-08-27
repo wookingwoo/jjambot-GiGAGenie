@@ -1,0 +1,180 @@
+
+/* Basic Layout */
+
+body, div, p, span {
+  box-sizing:border-box;
+  margin:0; 
+  padding:0; 
+}
+
+body {
+  position: absolute;
+  width: 1920px;
+  height: 1080px;
+  background-color: black;
+  background-image: url("../image/background.png");
+  background-repeat: no-repeat;
+}
+
+h2 {
+  color: #F0E882;
+  text-align: left;
+}
+
+
+h3 {
+  color: #BDBDBD;
+  text-align: left;
+}
+
+/* Table */
+
+table {
+  width: 100%;
+  max-width: 100%;
+}
+
+table>thead>tr>th {
+  background: #353535;
+  color: #BDBDBD;
+  font-size: 1.1em;
+  font-weight: lighter;
+  text-align: center;
+  padding: 8px;
+}
+
+table>tbody>tr>td {
+  text-align: center;
+  color: #FFF;
+  font-size: 1.1em;
+  border-top: 1px solid rgba(17, 16, 16, 0.1);
+  border-color: rgba(255, 255, 255, 0.185);
+  padding: 12px 5px;
+}
+
+/* Section Layout */
+
+#refresh{
+  overflow: hidden;
+  position: absolute;
+  top:90px;
+  left: 700px;
+  right: 500px;
+}
+
+#init-msg{
+  overflow: hidden;
+  position: absolute;
+  top:180px;
+  left: 180px;
+  right: 500px;
+}
+
+#table-left{
+  overflow: hidden;
+  position: absolute;
+  top:240px;
+  left: 180px;
+  right: 880px;
+}
+
+#table-right{
+  overflow: hidden;
+  position: absolute;
+  top:240px;
+  left: 1060px;
+  right: 180px;
+}
+
+#table-bottom{  
+  overflow: hidden;
+  position: absolute;
+  top:610px;
+  left: 180px;
+  right: 180px;
+}
+
+#comment
+{
+  font-weight: lighter;
+  text-align: right;
+  color: #9b9b9b;
+}
+
+/* Button */
+
+.btn {
+  background-color:teal;
+  border:none;
+  color:#FFF;
+  text-align:center;
+  text-decoration:none;
+  font-size:18px;
+  display:inline-block;
+  cursor:pointer;
+  transition-duration:.4s;
+  margin:2px;
+  padding:10px 20px;
+}
+
+.btn-reset:hover, .btn-getVoice:hover {
+  background-color: #FFF;
+  color: #000;
+}
+
+/* voice guide */
+
+.voice-guide-container {
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:132px;
+  color:#9b9b9b;
+  font-size:27px;
+  overflow:hidden;
+  box-sizing:border-box;
+  padding:18px 97px 54px 108px;
+}
+.voice-guide-container > p,
+.voice-guide-container .g-voice-icon {
+  display:inline-block;
+  vertical-align:middle;
+  font-family:RixHeadM;
+  margin:0;
+}
+
+/* KWS */
+.voice-guide-container .guide-mic {
+  color: #9b9b9b;
+}
+.voice-guide-container .g-voice-icon {
+  width: 60px;
+  height: 60px;
+  opacity: 0.7;
+}
+
+/* mic icon */
+.voice-guide-container .g-voice-icon > svg {
+  /* svg color */
+  fill: #9b9b9b;
+  opacity: 0.7;
+}
+
+/* voice guide box */
+.voice-guide-container .lolling-list span {
+  display:inline-block;
+  border:2px solid #9b9b9b;
+  border-radius:30px;
+  font-size:24px;
+  font-family:RixHeadB;
+  line-height:1;
+  text-align:center;
+  margin:0 6px;
+  padding:6px 21px;
+}
+.voice-guide-container .voice-guide-common {
+  float:right;
+  line-height:50px;
+  padding:0;
+}
