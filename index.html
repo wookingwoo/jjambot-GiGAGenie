@@ -19,7 +19,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>짬봇 보이스 - 군대 정보알림 AI 보이스봇 (JJAMBOT-Voice)</title>
+  <title>기가지니1,2 서비스 개발 환경 Test</title>
 
   <!-- 필수 Embed -->
   <meta name="viewport" content="height=1080, width=1920, user-scalable=no" />
@@ -27,19 +27,13 @@
   <script type="text/javascript" src="https://svcapi.gigagenie.ai/sdk/v1.0/js/gigagenie.js"></script>
   <script type="text/javascript" src="data/key.json"></script>
 
-
-
-
   <!-- 메뉴 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
-  <!-- stylesheets/menu_sheets -->
-
   <!-- 메뉴 끝 -->
-
-
 
   <script type="text/javascript">
     function init() {
@@ -56,8 +50,7 @@
         if (result_cd === 200) {
           // init 성공
           sendTTS('짬봇 보이스에 오신 여러분을 환영합니다.    부대별 식단과 여러 군생활 정보를 묻고 답해드립니다.');
-          readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829');
-          readFileTest()
+          showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
 
 
 
@@ -70,6 +63,7 @@
           showMsg('val0', result_msg);
           showMsg('extra0', 'appid: ' + extra.appid);
 
+          readFileTest()
 
 
 
@@ -318,27 +312,10 @@
             var breakfast = obj_menu[corps][date]['breakfast']
             var lunch = obj_menu[corps][date]['lunch']
             var dinner = obj_menu[corps][date]['dinner']
-            var specialFood = obj_menu[corps][date]['specialFood']
 
-            var list_breakfast = breakfast.split(',');
-
-
-            showMsg('date1', date);
-            showMsg('date2', date);
-            showMsg('date3', date);
-            showMsg('date4', date);
-            // showMsg('breakfast1', list_breakfast[1cd7]);
-            // showMsg('breakfast2', list_breakfast[2]);
-            // showMsg('breakfast3', list_breakfast[3]);
-            // showMsg('breakfast4', list_breakfast[4]);
-            // showMsg('breakfast5', list_breakfast[5]);
-            showMsg('breakfast1', breakfast);
-
-            showMsg('lunch1', lunch);
-            showMsg('dinner1', dinner);
-            showMsg('specialFood1', specialFood);
-
-
+            showMsg('cd8', breakfast);
+            showMsg('val8', lunch);
+            showMsg('extra8', dinner);
 
 
 
@@ -374,169 +351,95 @@
       <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
     </div>
 
-
-
-
-
-
-    <!-- 메뉴 표시부분 -->
-
-
-
     <div class="demo">
-      <!-- <div class="container"> -->
-      <div class="col-md-8-center" style="
-    margin-left: 150px;
-    margin-right: 150px;
-">
-        <!-- <div class="w-50 mx-auto"> -->
-        <div>
-          <h1 class="heading-title">짬봇 식단 알림</h1>
-        </div>
-
-        <div class="row">
-
-
-          <div class="col-md-3 col-sm-11">
-            <div class="pricingTable">
-              <div class="pricingTable-header">
-                <span class="heading">
-                  <h3 id="date1">loading..</h3>
-                </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>아침</span></span>
-                <span class="subtitle">breakfast</span>
+          <div class="container">
+              <div class="row text-center">
+                  <h1 class="heading-title">CSS Pricing Table</h1>
               </div>
 
-              <div class="pricingContent">
-                <ul>
-
-                  <li id="breakfast1">loading..</li>
-                  <li id="breakfast2">loading..</li>
-                  <li id="breakfast3">loading..</li>
-                  <li id="breakfast4">loading..</li>
-                  <li id="breakfast5">loading..</li>
-
-
-
-                </ul>
-              </div><!-- /  CONTENT BOX-->
-
-              <div class="pricingTable-sign-up">
-                <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
-              </div><!-- BUTTON BOX-->
-            </div>
-          </div>
-
-
-          <div class="col-md-3 col-sm-11">
-            <div class="pricingTable">
-              <div class="pricingTable-header">
-                <span class="heading">
-                  <h3 id="date2">loading..</h3>
-                </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>점심</span></span>
-                <span class="subtitle" id="lunch_num">lunch</span>
-              </div>
-
-              <div class="pricingContent">
-                <ul>
-
-                  <li id="lunch1">loading..</li>
-                  <li id="lunch2">loading..</li>
-                  <li id="lunch3">loading..</li>
-                  <li id="lunch4">loading..</li>
-                  <li id="lunch5">loading..</li>
-
-
-                </ul>
-              </div><!-- /  CONTENT BOX-->
-
-              <div class="pricingTable-sign-up">
-                <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
-              </div><!-- BUTTON BOX-->
-            </div>
-          </div>
-
-
-          <div class="col-md-3 col-sm-11">
-            <div class="pricingTable">
-              <div class="pricingTable-header">
-                <span class="heading">
-                  <h3 id="date">loading..</h3>
-                </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>저녁</span></span>
-                <span class="subtitle">dinner</span>
-              </div>
-
-              <div class="pricingContent">
-                <ul>
-
-                  <li id="dinner1">loading..</li>
-                  <li id="dinner2">loading..</li>
-                  <li id="dinner3">loading..</li>
-                  <li id="dinner4">loading..</li>
-                  <li id="dinner5">loading..</li>
-
-
-                </ul>
-              </div><!-- /  CONTENT BOX-->
-
-              <div class="pricingTable-sign-up">
-                <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
-              </div><!-- BUTTON BOX-->
-            </div>
-          </div>
-
-
-          <div class="col-md-3 col-sm-11">
-            <div class="pricingTable">
-              <div class="pricingTable-header">
-                <span class="heading">
-                  <h3 id="date">loading..</h3>
-                </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
-                <span class="subtitle">specialFood</span>
-              </div>
-
-              <div class="pricingContent">
-                <ul>
-
-                  <li id="cd7"></li>
-                  <li id="val7"></li>
-                  <li id="extra7"></li>
-                  <li id="specialFood4">loading..</li>
-                  <li id="specialFood5">loading..</li>
-
-
-                </ul>
-              </div><!-- /  CONTENT BOX-->
-
-              <div class="pricingTable-sign-up">
-                <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
-              </div><!-- BUTTON BOX-->
-            </div>
-          </div>
-
-
-
-
-        </div>
-      </div>
-
-    </div>
-
-    <!-- </div> -->
-    </div>
+              <div class="row">
+                  <div class="col-md-3 col-sm-6">
+                      <div class="pricingTable">
+                          <div class="pricingTable-header">
+                              <span class="heading">
+                                  <h3>Standard</h3>
+                              </span>
+                              <span class="price-value"><i class="fa fa-usd"></i><span>10</span></span>
+                              <span class="subtitle">Lorem ipsum dolor sit </span>
+                          </div>
 
 
 
 
 
-    <!-- 메뉴 표시부분 끝 -->
+
+                          <div class="pricingContent">
+                              <ul>
+                                  <li id="cd8"><b>50GB</b> Disk Space</li>
+                                  <li id="val8"><b>50</b> Email Accounts</li>
+                                  <li id="extra8"><b>10</b> subdomains</li>
+                                  <li><b>50GB</b> Monthly Bandwidth</li>
+                                  <li><b>50</b> Domains</li>
+                              </ul>
+                          </div><!-- /  CONTENT BOX-->
+
+                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
+                              <a href="#" class="btn btn-block btn-default">sign up</a>
+                          </div><!-- BUTTON BOX-->
+                      </div>
+                  </div>
+
+                  <div class="col-md-3 col-sm-6">
+                      <div class="pricingTable">
+                          <div class="pricingTable-header">
+                              <span class="heading">
+                                  <h3>Business</h3>
+                              </span>
+                              <span class="price-value"><i class="fa fa-usd"></i><span>20</span></span>
+                              <span class="subtitle">Lorem ipsum dolor sit</span>
+                          </div>
+
+                          <div class="pricingContent">
+                              <ul>
+                                  <li><b>70GB</b> Disk Space</li>
+                                  <li><b>70</b> Email Accounts</li>
+                                  <li><b>70GB</b> Monthly Bandwidth</li>
+                                  <li><b>20</b> subdomains</li>
+                                  <li><b>70</b> Domains</li>
+                              </ul>
+                          </div><!-- /  CONTENT BOX-->
+
+                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
+                              <a href="#" class="btn btn-block btn-default">sign up</a>
+                          </div><!-- BUTTON BOX-->
+                      </div>
+                  </div>
+
+                  <div class="col-md-3 col-sm-6">
+                      <div class="pricingTable">
+                          <div class="pricingTable-header">
+                              <span class="heading">
+                                  <h3>Premium</h3>
+                              </span>
+                              <span class="price-value"><i class="fa fa-usd"></i><span>30</span></span>
+                              <span class="subtitle">Lorem ipsum dolor sit</span>
+                          </div>
+
+                          <div class="pricingContent">
+                              <ul>
+                                  <li><b>80GB</b> Disk Space</li>
+                                  <li><b>80</b> Email Accounts</li>
+                                  <li><b>80GB</b> Monthly Bandwidth</li>
+                                  <li><b>30</b> subdomains</li>
+                                  <li><b>80</b> Domains</li>
+                              </ul>
+                          </div><!-- /  CONTENT BOX-->
+
+                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
+                              <a href="#" class="btn btn-block btn-default">sign up</a>
+                          </div><!-- BUTTON BOX-->
+                      </div>
+                  </div>
 
 
 
@@ -556,9 +459,9 @@
           <span id=kws>KWS</span>
         </p>
         <p class="lolling-list">
-          <span>오늘 메뉴 알려줘</span>
-          <span>부대 변경해줘</span>
-          <span>알러지 설정해줘</span>
+          <span>발화가이드01</span>
+          <span>발화가이드02</span>
+          <span>발화가이드03</span>
         </p>
         <p class="voice-guide-common">서비스를 종료하려면 “나가기”</p>
       </div>
