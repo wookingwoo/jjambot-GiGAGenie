@@ -313,9 +313,22 @@
             var lunch = obj_menu[corps][date]['lunch']
             var dinner = obj_menu[corps][date]['dinner']
 
+            var list_breakfast = String(breakfast).split(',');
+
             showMsg('cd8', breakfast);
             showMsg('val8', lunch);
             showMsg('extra8', dinner);
+
+            showMsg('date1', date);
+            showMsg('date2', date);
+
+
+            showMsg('breakfast1', list_breakfast[0]);
+            showMsg('breakfast2', list_breakfast[1]);
+            showMsg('breakfast3', list_breakfast[2]);
+            showMsg('breakfast4', list_breakfast[3]);
+            showMsg('breakfast5', list_breakfast[4]);
+
 
 
 
@@ -345,127 +358,173 @@
 
 <body onload=init()>
 
-  <!-- AI Kits 테스트 영역 -->
   <section>
     <div id="refresh">
       <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
     </div>
 
     <div class="demo">
-          <div class="container">
-              <div class="row text-center">
-                  <h1 class="heading-title">CSS Pricing Table</h1>
+      <!-- <div class="container"> -->
+      <div class="col-md-8-center" style="
+    margin-left: 150px;
+    margin-right: 150px;
+">
+        <!-- <div class="w-50 mx-auto"> -->
+        <div>
+          <h1 class="heading-title">짬봇 식단 알림</h1>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-3 col-sm-11">
+            <div class="pricingTable">
+              <div class="pricingTable-header">
+                <span class="heading">
+                  <h3 id="date1">loading..</h3>
+                </span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>아침</span></span>
+                <span class="subtitle">breakfast</span>
               </div>
 
-              <div class="row">
-                  <div class="col-md-3 col-sm-6">
-                      <div class="pricingTable">
-                          <div class="pricingTable-header">
-                              <span class="heading">
-                                  <h3>Standard</h3>
-                              </span>
-                              <span class="price-value"><i class="fa fa-usd"></i><span>10</span></span>
-                              <span class="subtitle">Lorem ipsum dolor sit </span>
-                          </div>
+              <div class="pricingContent">
+                <ul>
+
+                  <li id="breakfast1">loading..</li>
+                  <li id="breakfast2">loading..</li>
+                  <li id="breakfast3">loading..</li>
+                  <li id="breakfast4">loading..</li>
+                  <li id="breakfast5">loading..</li>
 
 
 
+                </ul>
+              </div><!-- /  CONTENT BOX-->
+
+              <div class="pricingTable-sign-up">
+                <!-- BUTTON BOX-->
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+              </div><!-- BUTTON BOX-->
+            </div>
+          </div>
+
+
+          <div class="col-md-3 col-sm-11">
+            <div class="pricingTable">
+              <div class="pricingTable-header">
+                <span class="heading">
+                  <h3 id="date2">loading..</h3>
+                </span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>점심</span></span>
+                <span class="subtitle" id="lunch_num">lunch</span>
+              </div>
+
+              <div class="pricingContent">
+                <ul>
+
+                  <li id="lunch1">loading..</li>
+                  <li id="lunch2">loading..</li>
+                  <li id="lunch3">loading..</li>
+                  <li id="lunch4">loading..</li>
+                  <li id="lunch5">loading..</li>
+
+
+                </ul>
+              </div><!-- /  CONTENT BOX-->
+
+              <div class="pricingTable-sign-up">
+                <!-- BUTTON BOX-->
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+              </div><!-- BUTTON BOX-->
+            </div>
+          </div>
+
+
+          <div class="col-md-3 col-sm-11">
+            <div class="pricingTable">
+              <div class="pricingTable-header">
+                <span class="heading">
+                  <h3 id="date">loading..</h3>
+                </span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>저녁</span></span>
+                <span class="subtitle">dinner</span>
+              </div>
+
+              <div class="pricingContent">
+                <ul>
+
+                  <li id="dinner1">loading..</li>
+                  <li id="dinner2">loading..</li>
+                  <li id="dinner3">loading..</li>
+                  <li id="dinner4">loading..</li>
+                  <li id="dinner5">loading..</li>
+
+
+                </ul>
+              </div><!-- /  CONTENT BOX-->
+
+              <div class="pricingTable-sign-up">
+                <!-- BUTTON BOX-->
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+              </div><!-- BUTTON BOX-->
+            </div>
+          </div>
+
+
+          <div class="col-md-3 col-sm-11">
+            <div class="pricingTable">
+              <div class="pricingTable-header">
+                <span class="heading">
+                  <h3 id="date">loading..</h3>
+                </span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
+                <span class="subtitle">specialFood</span>
+              </div>
+
+              <div class="pricingContent">
+                <ul>
+
+                  <li id="cd8"></li>
+                  <li id="val8"></li>
+                  <li id="extra8"></li>
+                  <li id="specialFood4">loading..</li>
+                  <li id="specialFood5">loading..</li>
+
+
+                </ul>
+              </div><!-- /  CONTENT BOX-->
+
+              <div class="pricingTable-sign-up">
+                <!-- BUTTON BOX-->
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+              </div><!-- BUTTON BOX-->
+            </div>
+          </div>
 
 
 
-                          <div class="pricingContent">
-                              <ul>
-                                  <li id="cd8"><b>50GB</b> Disk Space</li>
-                                  <li id="val8"><b>50</b> Email Accounts</li>
-                                  <li id="extra8"><b>10</b> subdomains</li>
-                                  <li><b>50GB</b> Monthly Bandwidth</li>
-                                  <li><b>50</b> Domains</li>
-                              </ul>
-                          </div><!-- /  CONTENT BOX-->
-
-                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
-                              <a href="#" class="btn btn-block btn-default">sign up</a>
-                          </div><!-- BUTTON BOX-->
-                      </div>
-                  </div>
-
-                  <div class="col-md-3 col-sm-6">
-                      <div class="pricingTable">
-                          <div class="pricingTable-header">
-                              <span class="heading">
-                                  <h3>Business</h3>
-                              </span>
-                              <span class="price-value"><i class="fa fa-usd"></i><span>20</span></span>
-                              <span class="subtitle">Lorem ipsum dolor sit</span>
-                          </div>
-
-                          <div class="pricingContent">
-                              <ul>
-                                  <li><b>70GB</b> Disk Space</li>
-                                  <li><b>70</b> Email Accounts</li>
-                                  <li><b>70GB</b> Monthly Bandwidth</li>
-                                  <li><b>20</b> subdomains</li>
-                                  <li><b>70</b> Domains</li>
-                              </ul>
-                          </div><!-- /  CONTENT BOX-->
-
-                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
-                              <a href="#" class="btn btn-block btn-default">sign up</a>
-                          </div><!-- BUTTON BOX-->
-                      </div>
-                  </div>
-
-                  <div class="col-md-3 col-sm-6">
-                      <div class="pricingTable">
-                          <div class="pricingTable-header">
-                              <span class="heading">
-                                  <h3>Premium</h3>
-                              </span>
-                              <span class="price-value"><i class="fa fa-usd"></i><span>30</span></span>
-                              <span class="subtitle">Lorem ipsum dolor sit</span>
-                          </div>
-
-                          <div class="pricingContent">
-                              <ul>
-                                  <li><b>80GB</b> Disk Space</li>
-                                  <li><b>80</b> Email Accounts</li>
-                                  <li><b>80GB</b> Monthly Bandwidth</li>
-                                  <li><b>30</b> subdomains</li>
-                                  <li><b>80</b> Domains</li>
-                              </ul>
-                          </div><!-- /  CONTENT BOX-->
-
-                          <div class="pricingTable-sign-up"><!-- BUTTON BOX-->
-                              <a href="#" class="btn btn-block btn-default">sign up</a>
-                          </div><!-- BUTTON BOX-->
-                      </div>
-                  </div>
-
-
-
-    <!-- 발화 가이드 영역-->
-    <div id="voice-guide">
-      <div class="genie-voice-guide voice-guide-container">
-        <p class="guide-mic">
-          <i class="g-voice-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" :style="`fill: ${this.color};`">
-              <path fill-rule="evenodd"
-                d="M31.354 43.407v8.871h-.041c.004.05.03.093.03.144 0 .906-.783 1.641-1.749 1.641-.967 0-1.75-.735-1.75-1.641 0-.051.026-.094.031-.144h-.03v-8.871c-9.16-.843-15.495-6.911-15.495-16.56 0-.981.709-1.775 1.725-1.775.905 0 1.614.794 1.724 1.775-.11 8.294 5.393 13.639 13.508 13.603 8.116.036 14.204-5.309 14.092-13.603.112-.981.821-1.775 1.726-1.775 1.016 0 1.725.794 1.725 1.775 0 9.649-6.335 15.717-15.496 16.56z" />
-              <path fill-rule="evenodd" d="M29.594 7.812c5.712 0 10.343 4.632 10.343 10.344v8.313c0 5.712-4.631 10.343-10.343 10.343-5.713 0-10.344-4.631-10.344-10.343v-8.313c0-5.712 4.631-10.344 10.344-10.344z" />
-            </svg>
-          </i>
-          <!-- 호출어 추가 -->
-          <!-- gigagenie.appinfo.getUserInfo - extra.kwsid으로 셋팅 -->
-          <span id=kws>KWS</span>
-        </p>
-        <p class="lolling-list">
-          <span>발화가이드01</span>
-          <span>발화가이드02</span>
-          <span>발화가이드03</span>
-        </p>
-        <p class="voice-guide-common">서비스를 종료하려면 “나가기”</p>
-      </div>
-    </div>
+          <!-- 발화 가이드 영역-->
+          <div id="voice-guide">
+            <div class="genie-voice-guide voice-guide-container">
+              <p class="guide-mic">
+                <i class="g-voice-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" :style="`fill: ${this.color};`">
+                    <path fill-rule="evenodd"
+                      d="M31.354 43.407v8.871h-.041c.004.05.03.093.03.144 0 .906-.783 1.641-1.749 1.641-.967 0-1.75-.735-1.75-1.641 0-.051.026-.094.031-.144h-.03v-8.871c-9.16-.843-15.495-6.911-15.495-16.56 0-.981.709-1.775 1.725-1.775.905 0 1.614.794 1.724 1.775-.11 8.294 5.393 13.639 13.508 13.603 8.116.036 14.204-5.309 14.092-13.603.112-.981.821-1.775 1.726-1.775 1.016 0 1.725.794 1.725 1.775 0 9.649-6.335 15.717-15.496 16.56z" />
+                    <path fill-rule="evenodd" d="M29.594 7.812c5.712 0 10.343 4.632 10.343 10.344v8.313c0 5.712-4.631 10.343-10.343 10.343-5.713 0-10.344-4.631-10.344-10.343v-8.313c0-5.712 4.631-10.344 10.344-10.344z" />
+                  </svg>
+                </i>
+                <!-- 호출어 추가 -->
+                <!-- gigagenie.appinfo.getUserInfo - extra.kwsid으로 셋팅 -->
+                <span id=kws>KWS</span>
+              </p>
+              <p class="lolling-list">
+                <span>발화가이드01</span>
+                <span>발화가이드02</span>
+                <span>발화가이드03</span>
+              </p>
+              <p class="voice-guide-common">서비스를 종료하려면 “나가기”</p>
+            </div>
+          </div>
   </section>
 </body>
 
