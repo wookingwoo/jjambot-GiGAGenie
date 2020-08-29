@@ -43,7 +43,10 @@
         if (result_cd === 200) {
           // init 성공
           sendTTS('짬봇 보이스에 오신 여러분을 환영합니다.    부대별 식단과 여러 군생활 정보를 묻고 답해드립니다.');
-          showMsg('val6', readMenu("data/crawling_data/allCorpsMenu.txt")); // 임시 테스트
+          showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
+
+
+
 
 
 
@@ -165,20 +168,9 @@
           break;
 
         case '메뉴 테스트':
-          // MenuParser()
 
-          // var str_menu = xtFile("data/crawling_data/allCorpsMenu.txt"); //<= Call function ===== don't need "file:///..." just the path
-          // var obj_menu = JSON.parse(str_menu);
-          //
-          //
-          // showMsg('val6', obj_menu);
-          showMsg('val6', readMenu("data/crawling_data/allCorpsMenu.txt"));
-          // showMsg('extra6', JSON.parse(readTextFile("data/crawling_data/allCorpsMenu.txt")));
+          showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
 
-
-
-          // showMsg('val6', "20200829");
-          // showMsg('extra6', obj_menu['5322']['20200829']);
 
           break;
       }
@@ -294,7 +286,7 @@
 
 
 
-    function readMenu(file) {
+    function readMenu(file, corps, date, meal) {
       var rawFile = new XMLHttpRequest(); // XMLHttpRequest (often abbreviated as XHR) is a browser object accessible in JavaScript that provides data in XML, JSON, but also HTML format, or even a simple text using HTTP requests.
       rawFile.open("GET", file, false); // open with method GET the file with the link file ,  false (synchronous)
       rawFile.onreadystatechange = function() {
@@ -303,22 +295,22 @@
           if (rawFile.status === 200) // status 200: "OK"
           {
             var allText = rawFile.responseText; //  Returns the response data as a string
-            // console.log(allText); // display text on the console
-            // showMsg('cd8', JSON.parse(allText));
 
             allText = allText.replace(/\'/gi, '"');
             allText = allText.replace(/\//gi, '&');
-            showMsg('cd6', typeof(allText));
-            showMsg('val8', "일단 나옴");
-            // showMsg('extra8', JSON.parse(allText)['5322']);
 
-            showMsg('extra8', JSON.parse(allText)['5322']['20200829']['dinner']);
-            // showMsg('extra8', JSON.parse(String(allText))['5322']);
+            var obj_menu = JSON.parse(allText)
 
 
+            var breakfast = obj_menu[corps][date]['breakfast']
+            var lunch = obj_menu[corps][date]['lunch']
+            var dinner = obj_menu[corps][date]['dinner']
 
-            return JSON.parse(allText)['5322']['20200829']['dinner'];
-            // showMsg('extra6', allText);
+            showMsg('cd8', breakfast);
+            showMsg('val8', lunch);
+            showMsg('extra8', dinner);
+
+
 
           }
         }
