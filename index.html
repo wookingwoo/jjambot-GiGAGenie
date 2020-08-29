@@ -26,6 +26,8 @@
   <link href="stylesheets/style.css" rel="stylesheet">
   <script type="text/javascript" src="https://svcapi.gigagenie.ai/sdk/v1.0/js/gigagenie.js"></script>
   <script type="text/javascript" src="data/key.json"></script>
+  <!-- <script type="text/javascript" src="data\crawling_data\allCorpsMenu.txt"></script> -->
+
   <script type="text/javascript">
     function init() {
       var options = {};
@@ -161,10 +163,10 @@
           break;
 
         case '메뉴 테스트':
-          // MenuParser()
-          var response_menu = MenuParser()
-          showMsg('val6', response_menu);
-          showMsg('extra6', "메뉴 파서 성공");
+          MenuParser()
+          // var response_menu = MenuParser()
+          // showMsg('val6', response_menu);
+          // showMsg('extra6', "메뉴 파서 성공");
 
           break;
       }
@@ -279,18 +281,63 @@
 
 
     function MenuParser() {
-      var text, parser, xmlDoc;
+      // var text, parser, xmlDoc;
+      //
+      // text = "<bookstore><book>" +
+      //   "<title>파싱 성공!!</title>" +
+      //   "<author>Giada De Laurentiis</author>" +
+      //   "<year>2005</year>" +
+      //   "</book></bookstore>";
+      //
+      // parser = new DOMParser();
+      // xmlDoc = parser.parseFromString(text, "text/xml");
+      //
+      // return xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
 
-      text = "<bookstore><book>" +
-        "<title>파싱 성공!!</title>" +
-        "<author>Giada De Laurentiis</author>" +
-        "<year>2005</year>" +
-        "</book></bookstore>";
 
-      parser = new DOMParser();
-      xmlDoc = parser.parseFromString(text, "text/xml");
 
-      return xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+      // var req = new XMLHttpRequest();
+      // req.open('GET', 'http://openapi.mnd.go.kr/.......', false);
+      // req.send(null);
+      // if (req.status == 200)
+      //   // return req.responseText;
+      //   return "ok wjh"
+
+
+
+      function readTextFile(file) {
+        var rawFile = new XMLHttpRequest(); // XMLHttpRequest (often abbreviated as XHR) is a browser object accessible in JavaScript that provides data in XML, JSON, but also HTML format, or even a simple text using HTTP requests.
+        rawFile.open("GET", file, false); // open with method GET the file with the link file ,  false (synchronous)
+        rawFile.onreadystatechange = function() {
+          if (rawFile.readyState === 4) // readyState = 4: request finished and response is ready
+          {
+            if (rawFile.status === 200) // status 200: "OK"
+            {
+              var allText = rawFile.responseText; //  Returns the response data as a string
+              // console.log(allText); // display text on the console
+              showMsg('extra6', allText);
+
+            }
+          }
+        }
+        rawFile.send(null); //Sends the request to the server Used for GET requests with param null
+      }
+
+      // readTextFile("text.txt"); //<= Call function ===== don't need "file:///..." just the path
+      // readTextFile("data/crawling_data/text.txt"); //<= Call function ===== don't need "file:///..." just the path
+      readTextFile("data/crawling_data/allCorpsMenu.txt"); //<= Call function ===== don't need "file:///..." just the path
+      
+
+
+
+      // var menu_data = JSON.parse(menu);
+      // // showMsg('cd7', menu_data.);
+      // showMsg('val7', menu_data.'5322'.'20200301');
+      // showMsg('extra7', menu_data."5322"."20200301");
+
+
+
+
     }
 
 
