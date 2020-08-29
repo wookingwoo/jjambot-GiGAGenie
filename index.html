@@ -322,8 +322,18 @@
             var dinner = obj_menu[corps][date]['dinner']
             var specialFood = obj_menu[corps][date]['specialFood']
 
+            var list_breakfast = breakfast.split(',');
 
-            showMsg('breakfast1', breakfast);
+
+            showMsg('date1', date);
+            showMsg('date2', date);
+            showMsg('date3', date);
+            showMsg('date4', date);
+            showMsg('breakfast1', list_breakfast[1]);
+            showMsg('breakfast2', list_breakfast[2]);
+            showMsg('breakfast3', list_breakfast[3]);
+            showMsg('breakfast4', list_breakfast[4]);
+            showMsg('breakfast5', list_breakfast[5]);
             showMsg('lunch1', lunch);
             showMsg('dinner1', dinner);
             showMsg('specialFood1', specialFood);
@@ -375,129 +385,150 @@
 
     <div class="demo">
       <!-- <div class="container"> -->
-        <div class="col-md-8-center" style="
+      <div class="col-md-8-center" style="
     margin-left: 150px;
     margin-right: 150px;
 ">
-<!-- <div class="w-50 mx-auto"> -->
-      <div>
+        <!-- <div class="w-50 mx-auto"> -->
+        <div>
           <h1 class="heading-title">짬봇 식단 알림</h1>
         </div>
 
         <div class="row">
-          <div class="col-md-3 col-sm-11">
-            <div class="pricingTable">
-              <div class="pricingTable-header">
-                <span class="heading">
-                  <h3>아침</h3>
-                </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>10</span></span>
-                <span class="subtitle">Lorem ipsum dolor sit </span>
-              </div>
 
-              <div class="pricingContent">
-                <ul>
-                  <li><b>50GB</b> Disk Space</li>
-                  <li><b>50</b> Email Accounts</li>
-                  <li><b>50GB</b> Monthly Bandwidth</li>
-                  <li><b>10</b> subdomains</li>
-                  <li><b>50</b> Domains</li>
-                </ul>
-              </div><!-- /  CONTENT BOX-->
-
-              <div class="pricingTable-sign-up">
-                <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">sign up</a>
-              </div><!-- BUTTON BOX-->
-            </div>
-          </div>
 
           <div class="col-md-3 col-sm-11">
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3>Business</h3>
+                  <h3 id="date1">loading..</h3>
                 </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>20</span></span>
-                <span class="subtitle">Lorem ipsum dolor sit</span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>아침</span></span>
+                <span class="subtitle" id="breakfast_num">breakfast</span>
               </div>
 
               <div class="pricingContent">
                 <ul>
-                  <li><b>70GB</b> Disk Space</li>
-                  <li><b>70</b> Email Accounts</li>
-                  <li><b>70GB</b> Monthly Bandwidth</li>
-                  <li><b>20</b> subdomains</li>
-                  <li><b>70</b> Domains</li>
+
+                  <li id="breakfast1">loading..</li>
+                  <li id="breakfast2">loading..</li>
+                  <li id="breakfast3">loading..</li>
+                  <li id="breakfast4">loading..</li>
+                  <li id="cd7">loading..</li>
+
+
                 </ul>
               </div><!-- /  CONTENT BOX-->
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">sign up</a>
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
+
 
           <div class="col-md-3 col-sm-11">
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3>Premium</h3>
+                  <h3 id="date2">loading..</h3>
                 </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>30</span></span>
-                <span class="subtitle">Lorem ipsum dolor sit</span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>점심</span></span>
+                <span class="subtitle" id="lunch_num">lunch</span>
               </div>
 
               <div class="pricingContent">
                 <ul>
-                  <li><b>80GB</b> Disk Space</li>
-                  <li><b>80</b> Email Accounts</li>
-                  <li><b>80GB</b> Monthly Bandwidth</li>
-                  <li><b>30</b> subdomains</li>
-                  <li><b>80</b> Domains</li>
+
+                  <li id="lunch1">loading..</li>
+                  <li id="lunch2">loading..</li>
+                  <li id="lunch3">loading..</li>
+                  <li id="lunch4">loading..</li>
+                  <li id="lunch5">loading..</li>
+
+
                 </ul>
               </div><!-- /  CONTENT BOX-->
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">sign up</a>
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
+
 
           <div class="col-md-3 col-sm-11">
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3>Extra</h3>
+                  <h3 id="date">loading..</h3>
                 </span>
-                <span class="price-value"><i class="fa fa-usd"></i><span>40</span></span>
-                <span class="subtitle">Lorem ipsum dolor sit</span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>저녁</span></span>
+                <span class="subtitle">dinner</span>
               </div>
 
               <div class="pricingContent">
                 <ul>
-                  <li><b>90GB</b> Disk Space</li>
-                  <li><b>90</b> Email Accounts</li>
-                  <li><b>90GB</b> Monthly Bandwidth</li>
-                  <li><b>40</b> subdomains</li>
-                  <li><b>90</b> Domains</li>
+
+                  <li id="dinner1">loading..</li>
+                  <li id="dinner2">loading..</li>
+                  <li id="dinner3">loading..</li>
+                  <li id="dinner4">loading..</li>
+                  <li id="dinner5">loading..</li>
+
+
                 </ul>
               </div><!-- /  CONTENT BOX-->
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">sign up</a>
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
+
+
+          <div class="col-md-3 col-sm-11">
+            <div class="pricingTable">
+              <div class="pricingTable-header">
+                <span class="heading">
+                  <h3 id="date">loading..</h3>
+                </span>
+                <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
+                <span class="subtitle">specialFood</span>
+              </div>
+
+              <div class="pricingContent">
+                <ul>
+
+                  <li id="specialFood1">loading..</li>
+                  <li id="specialFood2">loading..</li>
+                  <li id="specialFood3">loading..</li>
+                  <li id="specialFood4">loading..</li>
+                  <li id="specialFood5">loading..</li>
+
+
+                </ul>
+              </div><!-- /  CONTENT BOX-->
+
+              <div class="pricingTable-sign-up">
+                <!-- BUTTON BOX-->
+                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+              </div><!-- BUTTON BOX-->
+            </div>
+          </div>
+
+
+
+
         </div>
       </div>
 
-      </div>
+    </div>
 
-      <!-- </div> -->
+    <!-- </div> -->
     </div>
 
 
