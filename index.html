@@ -124,7 +124,7 @@
 
     function setVoiceFilter() {
       var options = {};
-      options.keyword = ['초급', '중급', '고급', '메뉴 테스트', '새로고침', '새로고침 해줘', '다시 시작'];
+      options.keyword = ['초급', '중급', '고급', '메뉴 테스트', '새로고침', '새로고침 해줘', '다시 시작', '아침 메뉴', '브리핑', 'briefing', '가나다라마바사'];
       showMsg('extra3', options.keyword);
       // 2-10. gigagenie.voice.setVoiceFilter
       gigagenie.voice.setVoiceFilter(options, function(result_cd, result_msg, extra) {
@@ -175,10 +175,17 @@
           break;
 
         case '메뉴 테스트':
-
           showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
+          break;
 
+        case '새로고침':
+        case '새로고침 해줘':
+        case '다시 시작':
+          init()
+          break;
 
+        case '가나다라마바사':
+          breakfast_briefing();
           break;
       }
     }
@@ -247,11 +254,7 @@
               showMsg('val10', '(Intent:' + intent + ') [음식]');
               break;
 
-            case '새로고침':
-            case '새로고침 해줘':
-            case '다시 시작':
-              init()
-              break;
+
 
           }
           break;
@@ -298,7 +301,10 @@
     /********************************* 정헌 개발 함수 **************************************/
 
 
-
+    var breakfast
+    var lunch
+    var dinner
+    var date_h
 
     function readMenu(file, corps, date, meal) {
       var rawFile = new XMLHttpRequest(); // XMLHttpRequest (often abbreviated as XHR) is a browser object accessible in JavaScript that provides data in XML, JSON, but also HTML format, or even a simple text using HTTP requests.
@@ -316,9 +322,9 @@
             var obj_menu = JSON.parse(allText)
 
 
-            var breakfast = obj_menu[corps][date]['breakfast']
-            var lunch = obj_menu[corps][date]['lunch']
-            var dinner = obj_menu[corps][date]['dinner']
+            breakfast = obj_menu[corps][date]['breakfast']
+            lunch = obj_menu[corps][date]['lunch']
+            dinner = obj_menu[corps][date]['dinner']
 
             var list_breakfast = String(breakfast).split(',');
             var list_lunch = String(lunch).split(',');
@@ -329,17 +335,17 @@
             showMsg('val8', lunch);
             showMsg('extra8', dinner);
 
-            date = date.substring(0,4) + "년 "+date.substring(4,6) + "월 "+date.substring(6,8) + "일"
+            date_h = date.substring(0, 4) + "년 " + date.substring(4, 6) + "월 " + date.substring(6, 8) + "일"
 
-            showMsg('date1', date);
-            showMsg('date2', date);
-            showMsg('date3', date);
-            showMsg('date4', date);
+            showMsg('date1', date_h);
+            showMsg('date2', date_h);
+            showMsg('date3', date_h);
+            showMsg('date4', date_h);
 
 
-            showMsg('breakfast_num', list_breakfast.length+"가지");
-            showMsg('lunch_num', list_lunch.length+"가지");
-            showMsg('dinner_num', list_dinner.length+"가지");
+            showMsg('breakfast_num', list_breakfast.length + "가지");
+            showMsg('lunch_num', list_lunch.length + "가지");
+            showMsg('dinner_num', list_dinner.length + "가지");
             // showMsg('specialFood_num', date);
 
 
@@ -378,6 +384,8 @@
         }
       }
       rawFile.send(null); //Sends the request to the server Used for GET requests with param null
+
+      return date_h
     }
 
 
@@ -397,10 +405,22 @@
     }
 
 
-    function briefing(){
-      sendTTS('아침 메뉴를 알려드리겠습니다.');
-
+    function breakfast_briefing() {
+      sendTTS(date_h + ' 아침 메뉴는 ' + breakfast + " 입니다.");
     }
+
+    function lunch_briefing() {
+      sendTTS(date_h + ' 점심 메뉴는 ' + lunch + " 입니다.");
+    }
+
+    function dinner_briefing() {
+      sendTTS(date_h + ' 저녁 메뉴는 ' + dinner + " 입니다.");
+    }
+
+
+    // function breakfast_briefing() {
+    //   sendTTS(date_h + ' 부식 메뉴는 ' + breakfast + " 입니다.");
+    // }
   </script>
 </head>
 
@@ -446,7 +466,7 @@
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
 
-                <a href="#" class="btn btn-block btn-default" onclick="briefing()">음성 브리핑</a>
+                <a href="#" class="btn btn-block btn-default" onclick="breakfast_briefing()">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
@@ -472,7 +492,7 @@
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+                <a href="#" class="btn btn-block btn-default" onclick="lunch_briefing()">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
@@ -497,7 +517,7 @@
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+                <a href="#" class="btn btn-block btn-default" onclick="dinner_briefing()">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
@@ -529,7 +549,7 @@
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+                <a href="#" class="btn btn-block btn-default" onclick="specialFood_briefing()">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
