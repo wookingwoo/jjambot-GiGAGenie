@@ -329,6 +329,8 @@
             showMsg('val8', lunch);
             showMsg('extra8', dinner);
 
+            date = date.substring(0,4) + "년 "+date.substring(4,6) + "월 "+date.substring(6,8) + "일"
+
             showMsg('date1', date);
             showMsg('date2', date);
             showMsg('date3', date);
@@ -393,6 +395,12 @@
       showMsg('extra7', test_file.msg3);
 
     }
+
+
+    function briefing(){
+      sendTTS('아침 메뉴를 알려드리겠습니다.');
+
+    }
   </script>
 </head>
 
@@ -437,7 +445,8 @@
 
               <div class="pricingTable-sign-up">
                 <!-- BUTTON BOX-->
-                <a href="#" class="btn btn-block btn-default">음성 브리핑</a>
+
+                <a href="#" class="btn btn-block btn-default" onclick="briefing()">음성 브리핑</a>
               </div><!-- BUTTON BOX-->
             </div>
           </div>
