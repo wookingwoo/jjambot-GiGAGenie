@@ -124,7 +124,7 @@
 
     function setVoiceFilter() {
       var options = {};
-      options.keyword = ['초급', '중급', '고급', '메뉴 테스트'];
+      options.keyword = ['초급', '중급', '고급', '메뉴 테스트', '새로고침', '새로고침 해줘', '다시 시작'];
       showMsg('extra3', options.keyword);
       // 2-10. gigagenie.voice.setVoiceFilter
       gigagenie.voice.setVoiceFilter(options, function(result_cd, result_msg, extra) {
@@ -246,6 +246,13 @@
             case '음식':
               showMsg('val10', '(Intent:' + intent + ') [음식]');
               break;
+
+            case '새로고침':
+            case '새로고침 해줘':
+            case '다시 시작':
+              init()
+              break;
+
           }
           break;
       }
@@ -314,6 +321,9 @@
             var dinner = obj_menu[corps][date]['dinner']
 
             var list_breakfast = String(breakfast).split(',');
+            var list_lunch = String(lunch).split(',');
+            var list_dinner = String(dinner).split(',');
+
 
             showMsg('cd8', breakfast);
             showMsg('val8', lunch);
@@ -321,13 +331,43 @@
 
             showMsg('date1', date);
             showMsg('date2', date);
+            showMsg('date3', date);
+            showMsg('date4', date);
 
 
-            showMsg('breakfast1', list_breakfast[0]);
-            showMsg('breakfast2', list_breakfast[1]);
-            showMsg('breakfast3', list_breakfast[2]);
-            showMsg('breakfast4', list_breakfast[3]);
-            showMsg('breakfast5', list_breakfast[4]);
+            showMsg('breakfast_num', list_breakfast.length+"가지");
+            showMsg('lunch_num', list_lunch.length+"가지");
+            showMsg('dinner_num', list_dinner.length+"가지");
+            // showMsg('specialFood_num', date);
+
+
+            var html_breakfast = ""
+            var html_lunch = ""
+            var html_dinner = ""
+
+
+
+
+
+            for (i = 0; i < list_breakfast.length; i++) {
+              html_breakfast = html_breakfast + '<li>' + list_breakfast[i] + '</li>'
+              // showMsg('lunch' + String(i + 1), list_lunch[i]);
+              showMsg('breakfast_lst', html_breakfast);
+            }
+
+            for (i = 0; i < list_lunch.length; i++) {
+              html_lunch = html_lunch + '<li>' + list_lunch[i] + '</li>'
+              // showMsg('lunch' + String(i + 1), list_lunch[i]);
+              showMsg('lunch_lst', html_lunch);
+            }
+
+
+
+            for (i = 0; i < list_dinner.length; i++) {
+              html_dinner = html_dinner + '<li>' + list_dinner[i] + '</li>'
+              // showMsg('lunch' + String(i + 1), list_lunch[i]);
+              showMsg('dinner_lst', html_dinner);
+            }
 
 
 
@@ -383,17 +423,12 @@
                   <h3 id="date1">loading..</h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>아침</span></span>
-                <span class="subtitle">breakfast</span>
+                <span class="subtitle" id="breakfast_num">breakfast</span>
               </div>
 
               <div class="pricingContent">
-                <ul>
+                <ul id="breakfast_lst">
 
-                  <li id="breakfast1">loading..</li>
-                  <li id="breakfast2">loading..</li>
-                  <li id="breakfast3">loading..</li>
-                  <li id="breakfast4">loading..</li>
-                  <li id="breakfast5">loading..</li>
 
 
 
@@ -419,13 +454,8 @@
               </div>
 
               <div class="pricingContent">
-                <ul>
+                <ul id="lunch_lst">
 
-                  <li id="lunch1">loading..</li>
-                  <li id="lunch2">loading..</li>
-                  <li id="lunch3">loading..</li>
-                  <li id="lunch4">loading..</li>
-                  <li id="lunch5">loading..</li>
 
 
                 </ul>
@@ -443,20 +473,14 @@
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3 id="date">loading..</h3>
+                  <h3 id="date3">loading..</h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>저녁</span></span>
-                <span class="subtitle">dinner</span>
+                <span class="subtitle" id="dinner_num">dinner</span>
               </div>
 
               <div class="pricingContent">
-                <ul>
-
-                  <li id="dinner1">loading..</li>
-                  <li id="dinner2">loading..</li>
-                  <li id="dinner3">loading..</li>
-                  <li id="dinner4">loading..</li>
-                  <li id="dinner5">loading..</li>
+                <ul id="dinner_lst">
 
 
                 </ul>
@@ -470,14 +494,15 @@
           </div>
 
 
+
           <div class="col-md-3 col-sm-11">
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3 id="date">loading..</h3>
+                  <h3 id="date4">loading..</h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
-                <span class="subtitle">specialFood</span>
+                <span class="subtitle" id="specialFood_num">specialFood</span>
               </div>
 
               <div class="pricingContent">
