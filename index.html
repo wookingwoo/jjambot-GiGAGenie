@@ -181,11 +181,11 @@
           showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
           break;
 
-        // case '새로고침':
-        // case '새로고침 해줘':
-        // case '다시 시작':
-        //   init()
-        //   break;
+        case '새로고침':
+        case '새로고침 해줘':
+        case '다시 시작':
+          init()
+          break;
 
         case '가나다라마바사':
           breakfast_briefing();
@@ -431,10 +431,20 @@
 
   <section>
     <div id="refresh">
+
+      <a href="#" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
+          <img src="image/prev.png" alt="Prev Image"></button></a>
+
       <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
+
 
       <a href="https://jjambot.wookingwoo.com/" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
           <i class="fas fa-home"></i> 홈</button></a>
+
+      <a href="#" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
+          <img src="image/next.png" alt="Next Image"></button></a>
+
+
 
     </div>
 
