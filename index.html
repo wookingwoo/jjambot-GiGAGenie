@@ -28,6 +28,9 @@
   <script type="text/javascript" src="data/key.json"></script>
 
   <!-- 메뉴 -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <!-- Optional theme -->
@@ -178,11 +181,11 @@
           showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
           break;
 
-        case '새로고침':
-        case '새로고침 해줘':
-        case '다시 시작':
-          init()
-          break;
+        // case '새로고침':
+        // case '새로고침 해줘':
+        // case '다시 시작':
+        //   init()
+        //   break;
 
         case '가나다라마바사':
           breakfast_briefing();
@@ -429,6 +432,10 @@
   <section>
     <div id="refresh">
       <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
+
+      <a href="https://jjambot.wookingwoo.com/" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
+          <i class="fas fa-home"></i> 홈</button></a>
+
     </div>
 
     <div class="demo">
