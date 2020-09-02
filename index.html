@@ -421,6 +421,16 @@
     }
 
 
+    function previous_date() {
+      readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200828')
+    }
+
+
+    function next_date() {
+      readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200830')
+    }
+
+
     // function breakfast_briefing() {
     //   sendTTS(date_h + ' 부식 메뉴는 ' + breakfast + " 입니다.");
     // }
@@ -432,17 +442,16 @@
   <section>
     <div id="refresh">
 
-      <a href="#" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
-          <i class="fas fa-chevron-left"></i></button></a>
+      <button type="button" class="btn btn-reset" onclick="previous_date()"><i class="fas fa-chevron-left"></i></button>
 
       <button type="button" class="btn btn-reset" onclick="window.location.href='index.html?n=' + new Date().getTime()">새로고침</button>
 
 
-      <a href="https://jjambot.wookingwoo.com/" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
+      <a href="https://jjambot.wookingwoo.com/" target="_blank"><button type="button" class="btn btn-reset">
           <i class="fas fa-home"></i> 홈</button></a>
 
-      <a href="#" target="_blank"><button class="btn btn-md features-btn-first animated fadeInLeft wow" data-wow-delay="0.95s">
-          <i class="fas fa-chevron-right"></i></button></a>
+      <button type="button" class="btn btn-reset" onclick="next_date()"><i class="fas fa-chevron-right"></i></button>
+
 
 
 
