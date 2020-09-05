@@ -328,10 +328,13 @@
             breakfast = obj_menu[corps][date]['breakfast']
             lunch = obj_menu[corps][date]['lunch']
             dinner = obj_menu[corps][date]['dinner']
+            specialFood = obj_menu[corps][date]['specialFood']
+
 
             var list_breakfast = String(breakfast).split(',');
             var list_lunch = String(lunch).split(',');
             var list_dinner = String(dinner).split(',');
+            var list_specialFood = String(specialFood).split(',');
 
 
             // showMsg('cd8', breakfast);
@@ -346,15 +349,17 @@
             showMsg('date4', date_h);
 
 
-            showMsg('breakfast_num', list_breakfast.length + "가지");
-            showMsg('lunch_num', list_lunch.length + "가지");
-            showMsg('dinner_num', list_dinner.length + "가지");
+            showMsg('breakfast_num', list_breakfast.length + "가지 메뉴");
+            showMsg('lunch_num', list_lunch.length + "가지 메뉴");
+            showMsg('dinner_num', list_dinner.length + "가지 메뉴");
+            showMsg('specialFood_num', list_specialFood.length + "가지 메뉴");
             // showMsg('specialFood_num', date);
 
 
             var html_breakfast = ""
             var html_lunch = ""
             var html_dinner = ""
+            var html_specialFood = ""
 
 
 
@@ -380,6 +385,12 @@
               showMsg('dinner_lst', html_dinner);
             }
 
+
+            for (i = 0; i < list_specialFood.length; i++) {
+              html_specialFood = html_specialFood + '<li>' + list_specialFood[i] + '</li>'
+              // showMsg('lunch' + String(i + 1), list_lunch[i]);
+              showMsg('specialFood_lst', html_specialFood);
+            }
 
 
 
@@ -474,7 +485,9 @@
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3><center id="date1">loading..</center></h3>
+                  <h3>
+                    <center id="date1">loading..</center>
+                  </h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>아침</span></span>
                 <span class="subtitle" id="breakfast_num">breakfast</span>
@@ -502,7 +515,9 @@
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3><center id="date2">loading..</center></h3>
+                  <h3>
+                    <center id="date2">loading..</center>
+                  </h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>점심</span></span>
                 <span class="subtitle" id="lunch_num">lunch</span>
@@ -528,7 +543,9 @@
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3><center id="date3">loading..</center></h3>
+                  <h3>
+                    <center id="date3">loading..</center>
+                  </h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>저녁</span></span>
                 <span class="subtitle" id="dinner_num">dinner</span>
@@ -554,30 +571,16 @@
             <div class="pricingTable">
               <div class="pricingTable-header">
                 <span class="heading">
-                  <h3><center id="date4">loading..</center></h3>
+                  <h3>
+                    <center id="date4">loading..</center>
+                  </h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
-                <span class="subtitle" id="specialFood_num">5가지</span>
+                <span class="subtitle" id="dinner_num">side dish</span>
               </div>
 
               <div class="pricingContent">
-                <ul>
-
-                  <!-- <li id="cd8"></li>
-                  <li id="val8"></li>
-                  <li id="extra8"></li>
-                  <li id="specialFood4">loading..</li>
-                  <li id="specialFood5">loading..</li> -->
-
-
-                  <li id="specialFood5">핫도그빵 (1)(6)(10)(12)</li>
-                  <li id="specialFood5">감자양파찌개 (5)(6)(10)</li>
-                  <li id="specialFood5">돼지고기가지볶음 (5)(6)(10)</li>
-                  <li id="specialFood5">순두부양념장 (5)(6)</li>
-                  <li id="specialFood5">배추김치(7~9월)</li>
-
-
-
+                <ul id="specialFood_lst">
 
                 </ul>
               </div><!-- /  CONTENT BOX-->
