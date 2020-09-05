@@ -308,6 +308,7 @@
     var lunch
     var dinner
     var date_h
+    var specialFood
 
     function readMenu(file, corps, date, meal) {
       var rawFile = new XMLHttpRequest(); // XMLHttpRequest (often abbreviated as XHR) is a browser object accessible in JavaScript that provides data in XML, JSON, but also HTML format, or even a simple text using HTTP requests.
@@ -321,6 +322,7 @@
 
             allText = allText.replace(/\'/gi, '"');
             allText = allText.replace(/\//gi, '&');
+            allText = allText.replace(/200ML,연간/gi, '200ML&연간');
 
             var obj_menu = JSON.parse(allText)
 
@@ -431,6 +433,9 @@
       sendTTS(date_h + ' 저녁 메뉴는 ' + dinner + " 입니다.");
     }
 
+    function specialFood_briefing() {
+      sendTTS(date_h + '부식 메뉴는 ' + specialFood + " 입니다.");
+    }
 
     function previous_date() {
       readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200828')
@@ -576,7 +581,7 @@
                   </h3>
                 </span>
                 <span class="price-value"><i class="fa fa-usd"></i><span>부식</span></span>
-                <span class="subtitle" id="dinner_num">side dish</span>
+                <span class="subtitle" id="specialFood_num">side dish</span>
               </div>
 
               <div class="pricingContent">
