@@ -38,6 +38,11 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- 메뉴 끝 -->
 
+  <!-- bootswatch -->
+
+  <!-- bootswatch 끝 -->
+
+
   <script type="text/javascript">
     function init() {
       var options = {};
@@ -324,6 +329,35 @@
             allText = allText.replace(/\//gi, '&');
             allText = allText.replace(/200ML,연간/gi, '200ML&연간');
 
+
+            var allergyInfo = 'off'
+            var allergy_food = '9'
+
+
+            if (allergy_food == '9') {
+              allText = allText.replace(/\(9\)/gi, '<img src=image/shrimp.png width=30>'); // (1자리수)를 공백으로 변환
+
+            }
+
+
+            if (allergyInfo == 'off' || allergyInfo == '' || allergyInfo == '9') {
+
+
+
+              // 알러지 정보 표시가 "off"이거나 ""일때
+              allText = allText.replace(/\([0-9]\)/gi, ''); // (1자리수)를 공백으로 변환
+              allText = allText.replace(/\([0-9][0-9]\)/gi, ''); // (2자리수)를 공백으로 변환
+
+              // 		배추김치(3~4월)에서 (3~4월)제거하기
+              allText = allText.replace(/\([0-9]~[0-9]월\)/gi, '');
+              allText = allText.replace(/\([0-9]~[0-9][0-9]월\)/gi, '');
+              allText = allText.replace(/\([0-9][0-9]~[0-9][0-9]월\)/gi, '');
+
+
+
+            }
+
+
             var obj_menu = JSON.parse(allText)
 
 
@@ -445,6 +479,7 @@
     function next_date() {
       readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200830')
     }
+
 
 
     // function breakfast_briefing() {
@@ -598,7 +633,6 @@
           </div>
 
 
-
           <!-- 발화 가이드 영역-->
           <div id="voice-guide">
             <div class="genie-voice-guide voice-guide-container">
@@ -623,6 +657,8 @@
             </div>
           </div>
   </section>
+
+  <div>아이콘 제작자 <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 
 </html>
