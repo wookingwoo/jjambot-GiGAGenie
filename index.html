@@ -57,7 +57,7 @@
       gigagenie.init(options, function(result_cd, result_msg, extra) {
         if (result_cd === 200) {
           // init 성공
-          sendTTS('짬봇 보이스에 오신 여러분을 환영합니다.    부대별 식단과 여러 군생활 정보를 묻고 답해드립니다.');
+          sendTTS('짬봇 보이스에 오신 여러분을 환영합니다.    부대별 식단과 여러 군생활 정보를 알려드립니다.');
           showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
 
 
@@ -289,7 +289,7 @@
     // 1-3. gigagenie.init.onAppStatusChange
     // https://ktaidevelopers.github.io/2_서비스%20개발하기/디자인%20작업하기/#인터럽트-상황-대응
     gigagenie.init.onAppStatusChange = function(extra) {
-      alert('onAppStatusChange: status=${extra.changeStatus}, mute=${extra.muteFlag}');
+      // alert('onAppStatusChange: status=${extra.changeStatus}, mute=${extra.muteFlag}');
 
 
 
@@ -304,7 +304,7 @@
 
         } else {
           // TODO: Media Contents Resume
-          alert('Media Contents Resume');
+          // alert('Media Contents Resume');
 
         }
       } else { // extra.changeStatus == 1
@@ -346,7 +346,7 @@
 
 
             var allergyInfo = 'off'
-            var allergy_food = '69'
+            var allergy_food = '690'
 
 
             if (allergy_food == '69') {
@@ -516,7 +516,7 @@
       <a href="https://jjambot.wookingwoo.com/" target="_blank"><button type="button" class="btn btn-reset">
           <i class="fas fa-home"></i> 홈</button></a>
 
-      <a href="./setting/index.html" target="_blank"><button type="button" class="btn btn-reset">
+      <a href="./setting/setting_corps.html" target="_blank"><button type="button" class="btn btn-reset">
           <i class="fas fa-cog"></i> 설정</button></a>
 
       <button type="button" class="btn btn-reset" onclick="next_date()"><i class="fas fa-chevron-right"></i></button>
@@ -676,7 +676,6 @@
           </div>
   </section>
 
-  <div>아이콘 제작자 <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>
 </body>
 
 </html>
