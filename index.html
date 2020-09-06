@@ -35,7 +35,7 @@
 
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="stylesheets\menu_sheets\css\style.css">
   <!-- 메뉴 끝 -->
 
   <!-- bootswatch -->
@@ -132,7 +132,7 @@
 
     function setVoiceFilter() {
       var options = {};
-      options.keyword = ['초급', '중급', '고급', '메뉴 테스트', '새로고침', '새로고침 해줘', '다시 시작', '아침 메뉴', '브리핑', 'briefing', '가나다라마바사'];
+      options.keyword = ['초급', '중급', '고급', '메뉴 테스트', '새로고침', '새로고침 해줘', '다시 시작', '아침 메뉴 알려줘', '점심 메뉴 알려줘', '저녁 메뉴 알려줘', '부식 알려줘'];
       showMsg('extra3', options.keyword);
       // 2-10. gigagenie.voice.setVoiceFilter
       gigagenie.voice.setVoiceFilter(options, function(result_cd, result_msg, extra) {
@@ -186,15 +186,30 @@
           showMsg('cd6', readMenu("data/crawling_data/allCorpsMenu.txt", '5322', '20200829'));
           break;
 
+        case '아침 메뉴 알려줘':
+          breakfast_briefing();
+          break;
+
+        case '점심 메뉴 알려줘':
+          lunch_briefing();
+          break;
+
+        case '저녁 메뉴 알려줘':
+          dinner_briefing();
+          break;
+
+        case '부식 알려줘':
+          specialFood_briefing();
+          break;
+
+
         case '새로고침':
         case '새로고침 해줘':
         case '다시 시작':
           init()
           break;
 
-        case '가나다라마바사':
-          breakfast_briefing();
-          break;
+
       }
     }
 
@@ -330,7 +345,7 @@
             allText = allText.replace(/200ML,연간/gi, '200ML&연간');
 
 
-            var allergyInfo = 'on'
+            var allergyInfo = 'off'
             var allergy_food = '69'
 
 
